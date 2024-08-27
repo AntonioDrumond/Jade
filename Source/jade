@@ -76,7 +76,7 @@ else
 				# Compare outputs
 				if [ "$TARGET" = "" ]; then
 				
-					./s $IN $OUT
+					echo "No verification program yet" # <-- run program
 
 				fi
 			fi
