@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Author: Davi Ferreira Puddo #
+
+# Variables 
+FILE=$1					# Full file name (First parameter)
+FILENAME=${FILE%.*}	    # File name
+EXT=${FILE##*.}    	    # File extension
+IN=$2					# Input file (Second parameter)
+OUT=$3					# Output file (Third parameter)
+TARGET=$4				# Output file for comparison (Fourth parameter)
+BUFFER=""				# Buffer for c extension
+
+# Test if code is compiled
+
+if [ ! -f $FILENAME ] && [ ! -f $FILENAME.exe ] && [ ! -f $FILENAME.class ]; then
+
+	echo "ERROR: No $EXT compiled code with name: '$FILENAME' !"
+
+else
+
+	# Test if the file extension is valid
+	if [ ! "$EXT" = "java" ] && [ ! "$EXT" = "c" ]; then
+
+			echo "ERROR: Unknow file type !"
+
+	else
+	
+		# Test input file
+		if [ "$IN" = "" ]; then
+
+			echo "ERROR: No input file !"
+
+		else	# --If input file was given-- #
+			
+			# Test if input file exists
+			if [[ ! -f $IN ]]; then
+
+				echo "ERROR: Input file does not exist !"
+
+			else 	# --If input file exists-- #
+			
+				# Test if output file is set
+				if [ "$OUT" = "" ]; then
+
+					echo "Warning: No output file given, setting output to 'my.out'"
+					OUT=my.out		
+
+				fi
+
+				# Compile code:
+
+				# For Java
+				if [ "$EXT" = "java" ]; then
+
+						echo "java "$FILENAME" <"$IN" >"$OUT""
+						java $FILENAME <"$IN" >"$OUT"
+
+				fi
+
+				# For C
+				if [ "$EXT" = "c" ]; then
+
+					# Test c compiled file extension
+					if [ ! -f $FILENAME ]; then
+
+						BUFFER=.exe
+				
+					fi
+			
+					echo "./"$FILENAME" <"$IN" >"$OUT" "
+					./$FILENAME$BUFFER <$IN >$OUT
+
+				fi
+		
+				# Compare outputs
+				if [ "$TARGET" = "" ]; then
+					echo "run diff"			# <--- run program
+				fi
+			fi
+		fi
+	fi
+fi
