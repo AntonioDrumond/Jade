@@ -75,7 +75,9 @@ else
 		
 				# Compare outputs
 				if [ "$TARGET" = "" ]; then
-					echo "run diff"			# <--- run program
+				
+					./s $IN $OUT
+
 				fi
 			fi
 		fi
