@@ -75,6 +75,18 @@ class Stack{
 		std::cout << "Erros encontrados em " << qnt << " linhas de " << totalLines << "\n\n";
 	}
 
+	void print(int totalLines, int linhasComparadas){
+		double raz = (double)totalLines / (double)linhasComparadas;
+		std::cout << "Os arquivos comparados tinham quantidades de linhas diferentes, e a razao entre eles e de aproximadamente: " << raz << "\n";
+		if(top!=nullptr){
+			std::cout << "Entre as linhas comparadas (ate o fim do primeiro arquivo), foram encontrados os seguintes erros:\n\n";
+			std::cout << "Linha: x\nSaida esperada\nSaida do usuario\n\n";
+			printRec(top);
+		}
+		std::cout << "Nao ha estimativa de resultado pois os arquivos tinham tamanhos diferentes.\n";
+		std::cout << "Erros encontrados em " << qnt << " linhas de " << linhasComparadas << "\n\n";
+	}
+
 	void printRec(Cell* current){
 		if(current->next!=nullptr) printRec(current->next);
 			std::cout << "Linha: " << current->index << "\n";

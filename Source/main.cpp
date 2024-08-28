@@ -106,6 +106,7 @@ int main(int argc, char* argv[]){
 
 	Stack* pilha = new Stack();
 	int linha = 1;
+	int linhasComparadas = 0;
 	bool reading1 = true;
 	bool reading2 = true;
 	bool linDif = false;
@@ -128,8 +129,10 @@ int main(int argc, char* argv[]){
 			//std::cout << linha << "\n" << l2 << "\n" << l1 << "\n\n";
 		}
 
-		if((reading1&&!reading2) || (!reading1&&reading2))
+		if(!linDif && ((reading1&&!reading2) || (!reading1&&reading2))){
 			linDif = true;
+			linhasComparadas = linha;
+		}
 
 		linha++;
 		if(!pushed){
@@ -142,7 +145,10 @@ int main(int argc, char* argv[]){
 	pub.close();
 
 	//___Exibir resultado___
-	pilha->print(linha);
+	if(linDif)
+		pilha->print(linha-1, linhasComparadas-1);
+	else
+		pilha->print(linha-1);
 	
 	delete pilha;
 	return 0;
