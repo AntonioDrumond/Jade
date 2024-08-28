@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
 		std::cout << "Modo de uso:\n";
 		std::cout << "Para compilar e comparar: \"jade sourceCode myOutput pub.out\"\n";
 		std::cout << "Para comparar apenas: \"jade myOutput pub.out\"\n";
-		return 1;
+		return 0;
 	}
 	if(argc < 3){
 		std::cerr << "ERRO: Parametros insuficientes\n";
