@@ -39,26 +39,28 @@ int main(int argc, char* argv[]){
 	if(argc == 4){
 
 		if(isCFile(argv[1])){
-			//__Gerar comando de compilacao__
 			char* comando = concat("gcc -o program ", argv[1]);
-			comando = concat(comando, " <");
-			comando = concat(comando, argv[2]);
-			comando = concat(comando, " >my.out");
-
-			if(system(comando) == 0){ //___Abrir arquivos para leitura___
-				my.open("my.out");
-				pub.open(argv[3]);
-
-				if(!my || !pub){
-					std::cerr << "ERRO: Erro ao abrir arquivos\n";
-					return 1;
-				}
-			}
-
-			else{ //___Caso a compilacao falhe___
-				std::cerr << "ERRO: Erro ao compilar programa\n";
+			if(system(comando) != 0){ //___Compilar o programa___
+				std::cerr << "ERRO: Erro ao compilar o programa\n";
 				return 1;
 			}
+			delete comando;
+
+			comando = concat("./program <", argv[2]);
+			comando = concat(comando, " >my.out");
+			if(system(comando) != 0){ //___Executar o programa___
+				std::cerr << "ERRO: Erro ao executar o programa\n";
+				return 1;
+			}
+
+			my.open("my.out");
+			pub.open(argv[3]);
+
+			if(!my || !pub){
+				std::cerr << "ERRO: Erro ao abrir arquivos\n";
+				return 1;
+			}
+
 		}
 
 
