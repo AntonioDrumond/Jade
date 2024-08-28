@@ -52,6 +52,7 @@ int main(int argc, char* argv[]){
 				std::cerr << "ERRO: Erro ao executar o programa\n";
 				return 1;
 			}
+			delete comando;
 
 			my.open("my.out");
 			pub.open(argv[3]);
@@ -60,9 +61,34 @@ int main(int argc, char* argv[]){
 				std::cerr << "ERRO: Erro ao abrir arquivos\n";
 				return 1;
 			}
-
 		}
 
+		if(isJavaFile(argv[1])){
+			char* comando = concat("javac ", argv[1]);
+			if(system(comando) != 0){ //___Compilar o programa___
+				std::cerr << "ERRO: Erro ao compilar o programa\n";
+				return 1;
+			}
+			delete comando;
+
+			comando = concat("java ", removeExtension(argv[1]));
+			comando = concat(comando, " <");
+			comando = concat(comando, argv[2]);
+			comando = concat(comando, " >my.out");
+			if(system(comando) != 0){ //___Executar o programa___
+				std::cerr << "ERRO: Erro ao executar o programa\n";
+				return 1;
+			}
+			delete comando;
+
+			my.open("my.out");
+			pub.open(argv[3]);
+
+			if(!my || !pub){
+				std::cerr << "ERRO: Erro ao abrir arquivos\n";
+				return 1;
+			}
+		}
 
 		else{
 			std::cerr << "ERRO: Tipo de arquivo desconhecido\n";
