@@ -19,8 +19,9 @@ void flag(){
 int main(int argc, char* argv[]){
 	if(argc == 1){
 		std::cout << "Modo de uso:\n";
-		std::cout << "Para compilar e comparar: \"jade sourceCode myOutput pub.out\"\n";
+		std::cout << "Para compilar e comparar: \"jade sourceCode pub.in pub.out\"\n";
 		std::cout << "Para comparar apenas: \"jade myOutput pub.out\"\n";
+		std::cout << "(Voce deve ter os arquivos \"pub.in\" e \"pub.out\" baixados)\n";
 		return 0;
 	}
 	if(argc == 2){
