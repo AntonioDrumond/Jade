@@ -17,16 +17,13 @@ void flag(){
 }
 
 int main(int argc, char* argv[]){
-	int myOut = 1,
-		pubOut = 2;
-
 	if(argc == 1){
 		std::cout << "Modo de uso:\n";
 		std::cout << "Para compilar e comparar: \"jade sourceCode myOutput pub.out\"\n";
 		std::cout << "Para comparar apenas: \"jade myOutput pub.out\"\n";
 		return 0;
 	}
-	if(argc < 3){
+	if(argc == 2){
 		std::cerr << "ERRO: Parametros insuficientes\n";
 		return 1;
 	}
@@ -35,27 +32,46 @@ int main(int argc, char* argv[]){
 		return 1;
 	}
 
-	//___Compilar o codigo fonte___
-	else if(argc == 4){
-		myOut++; pubOut++;
-		std::cout << "compilando " << argv[1] << "...\n\n";
-		
-	}
-
-
-	//___Abrir arquivos para leitura___
-	
 	std::ifstream my;
-	my.open(argv[myOut]);
-	
 	std::ifstream pub;
-	pub.open(argv[pubOut]);
 
-	if(!my || !pub){
-		std::cerr << "ERROR: Error opening files\n";
-		return 1;
+	//___Compilar o codigo fonte___
+	if(argc == 4){
+
+		if(isCFile(argv[1])){
+			//__Gerar comando de compilacao__
+			char* comando = concat("gcc -o program ", argv[1]);
+			comando = concat(comando, " <");
+			comando = concat(comando, argv[2]);
+			comando = concat(comando, " >my.out");
+
+			if(system(comando) == 0){ //___Abrir arquivos para leitura___
+				my.open("my.out");
+				pub.open(argv[3]);
+
+				if(!my || !pub){
+					std::cerr << "ERRO: Erro ao abrir arquivos\n";
+					return 1;
+				}
+			}
+
+			else{ //___Caso a compilacao falhe___
+				std::cerr << "ERRO: Erro ao compilar programa\n";
+				return 1;
+			}
+		}
+
+
+		else{
+			std::cerr << "ERRO: Tipo de arquivo desconhecido\n";
+			return 1;
+		}
 	}
 
+	else{ //___Abrir arquivos para leitura, caso apenas 2 inputs___
+		my.open(argv[1]);
+		pub.open(argv[2]);
+	}
 
 	//___Comparar arquivos___
 

@@ -83,3 +83,20 @@ class Stack{
 			std::cout << "\n";
 		}
 };
+
+bool isCFile(char* name){
+	int leng = strlen(name);
+	return (name[leng-1]=='c' && name[leng-2]=='.');
+}
+
+bool isJavaFile(char* name){
+	int leng = strlen(name);
+	return (name[leng-1]=='a' && name[leng-2]=='v' && name[leng-3]=='a' && name[leng-4]=='j' && name[leng-5]=='.');
+}
+
+char* concat(const char* st1, const char* st2){
+	char* result = new char[strlen(st1) + strlen(st2) + 1];
+	strcpy(result, st1);
+	strcat(result, st2);
+	return result;
+}
