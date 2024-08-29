@@ -34,3 +34,10 @@
   #adding Jade to PATH
   export PATH="/opt/Jade:$PATH"
 ```
+
+### NixOS
++ Primeiro, adicione a seguinte linha ao arquivo ``/etc/nixos/configuration.nix``:
+```nix
+  environment.localBinInPath = true;
+```
++ Então, compile o programa e coloque o executável na pasta ``~/.local/bin/``
