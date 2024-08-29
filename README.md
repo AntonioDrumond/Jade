@@ -29,7 +29,7 @@
 
 ## Como instalar:
 ### Linux
-+ Para adicionar o Jade ao PATH de seu sistema, basta adicionar as seguintes linhas ao arquivo ``~/.bashrc``
++ Para adicionar o Jade ao PATH, basta adicionar as seguintes linhas ao arquivo ``~/.bashrc`` e substituir ``/opt/Jade`` pelo endereço do diretório do executável no seu sistema
 ```sh
   #adding Jade to PATH
   export PATH="/opt/Jade:$PATH"
