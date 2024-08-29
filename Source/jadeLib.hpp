@@ -64,7 +64,7 @@ class Stack{
 	}
 
 	void print(int totalLines){
-		double pct = 100 * (totalLines-qnt) / totalLines ;
+		double pct = (100 * (totalLines-qnt) / (double)totalLines) ;
 		//std::cout << "Resultado estimado: " << pct << "%\n";
 		//std::cout << "Erros encontrados em " << qnt << " linhas de " << totalLines << "\n\n";
 		if(top!=nullptr){

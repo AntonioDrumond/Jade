@@ -146,9 +146,9 @@ int main(int argc, char* argv[]){
 
 	//___Exibir resultado___
 	if(linDif)
-		pilha->print(linha-1, linhasComparadas-1);
+		pilha->print(linha-2, linhasComparadas-1);
 	else
-		pilha->print(linha-1);
+		pilha->print(linha-2);
 	
 	delete pilha;
 	return 0;
