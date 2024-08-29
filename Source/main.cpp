@@ -64,7 +64,7 @@ int main(int argc, char* argv[]){
 			}
 		}
 
-		if(isJavaFile(argv[1])){
+		else if(isJavaFile(argv[1])){
 			char* comando = concat("javac ", argv[1]);
 			if(system(comando) != 0){ //___Compilar o programa___
 				std::cerr << "ERRO: Erro ao compilar o programa\n";
