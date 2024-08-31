@@ -106,12 +106,22 @@ bool isJavaFile(char* name){
 	return (name[leng-1]=='a' && name[leng-2]=='v' && name[leng-3]=='a' && name[leng-4]=='j' && name[leng-5]=='.');
 }
 
-char* removeExtension(const char* name){
+/*char* removeExtension(const char* name){
 	char* result = new char[strlen(name)-4];
 	int reps = strlen(name)-5;
 	for(int i=0; i<reps; i++){
 		result[i] = name[i];
 	}
+	return result;
+}*/
+
+char* removeExtension(const char* name){
+	char* result = new char[strlen(name)-3];
+	int i = 0;
+	do{
+		result[i] = name[i];
+		i++;
+	}while(name[i] != '.');
 	return result;
 }
 
