@@ -46,9 +46,15 @@ int main(int argc, char* argv[]){
 				return 1;
 			}
 			delete comando;
-
-			comando = concat("./program <", argv[2]);
-			comando = concat(comando, " >my.out");
+			
+			// ___Rodar programa___
+			#if defined(_WIN32) || defined(_WIN64) || defined(__WINDOWS__) // ___Rodar programa no windows___
+				comando = concat("program.exe <", argv[2]);
+				comando = concat(comando, " >my.out");
+			#elif defined(__linux__)	// ___Rodar programa no linux___
+				comando = concat("./program <", argv[2]);
+				comando = concat(comando, " >my.out");
+			#endif
 			if(system(comando) != 0){ //___Executar o programa___
 				std::cerr << "ERRO: Erro ao executar o programa\n";
 				return 1;
